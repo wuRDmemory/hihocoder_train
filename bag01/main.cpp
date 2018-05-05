@@ -4,8 +4,6 @@
 
 using namespace std;
 
-int bag01[501][100001]={0};
-
 int main() {
     int data_cnt=0, value_sum=0;
     cin >> data_cnt >> value_sum;
@@ -21,6 +19,8 @@ int main() {
         return a.first < b.first;
     });
 
+#if SCHEME_1
+    int bag01[501][100001]={0};
     for (int i = 0; i < data_cnt; ++i) {
         auto data_i = data[i];
         for (int j = 0; j < value_sum; ++j) {
@@ -41,5 +41,18 @@ int main() {
 
     int show_data = bag01[data_cnt-1][value_sum-1];
     cout << show_data;
+#else
+    int bag01[100001]={0};
+    for (int i = 0; i < data_cnt; ++i) {
+        auto data_i = data[i];
+        for (int j = value_sum-1; j >= 0; --j) {
+            if (j >= data_i.first) {
+                bag01[j] = std::max(bag01[j-data_i.first]+data_i.second, bag01[j]);
+            }
+        }
+    }
+    int show_data = bag01[value_sum-1];
+    cout << show_data;
+#endif
     return 0;
 }
