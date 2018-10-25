@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -26,8 +27,10 @@ bool get_cross_sum(long num, int k) {
 int main() {
 
     long l = 0, r = 0, k = 0, res = 0;
-    cin >> l >> r >> k;
-
+//    cin >> l >> r >> k;
+    string name;
+    getline(cin, name);
+    cout << name << endl;
     for (int i = l; i <= r; ++i) {
         if (get_cross_sum(i, k)) {
             res += i;
